@@ -10,17 +10,17 @@ end testbench;
 architecture RTL of testbench is
     component top
         port(
-            clk: in std_logic := '0';       -- system clock
-            alldone: out std_logic := '0';  -- notify that iteration was finished
-            top4: inout route4 := (others => ((others => '0'), (others => '0'), (others => '0')));
+            clk:     in    std_logic := '0';  -- system clock
+            alldone: out   std_logic := '0';  -- notify that iteration was finished
+            top4:    inout route4 := (others => ((others => '0'), (others => '0'), (others => '0')));
 
             clk_count: inout std_logic_vector(31 downto 0) := (others => '0')
         );
     end component;
 
-    signal clk: std_logic := '0';
+    signal clk:       std_logic := '0';
     signal clk_count: std_logic_vector(31 downto 0) := (others => '0');
-    signal alldone: std_logic := '0';
+    signal alldone:   std_logic := '0';
 
     signal top0_gate: gate_t := (others => '0');
     signal top1_gate: gate_t := (others => '0');
@@ -41,9 +41,9 @@ architecture RTL of testbench is
 
 begin
     tcl: top port map(
-        clk => clk,
+        clk       => clk,
         clk_count => clk_count,
-        alldone => alldone,
+        alldone   => alldone,
 
         top4(0).gate => top0_gate,
         top4(1).gate => top1_gate,

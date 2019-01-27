@@ -12,8 +12,8 @@ entity ram_sync is
         clk: in std_logic := '0';
         we:  in std_logic := '0';
         address: in  address_t := (others => '0');
-        datain:  in  route_t := ((others => '0'), (others => '0'), (others => '0'));
-        dataout: out route_t := ((others => '0'), (others => '0'), (others => '0'))
+        datain:  in  route_t   := ((others => '0'), (others => '0'), (others => '0'));
+        dataout: out route_t   := ((others => '0'), (others => '0'), (others => '0'))
     );
 end entity ram_sync;
 
