@@ -25,7 +25,7 @@ architecture RTL of collatz is
 
 begin
     process(clk)
-        variable shift: std_logic_vector(3 downto 0) := (others => '0');  -- width to shift
+        variable shift: std_logic_vector(4 downto 0) := (others => '0');  -- width to shift
         variable h:     peak_t   := (others => '0');  -- temporarily store the current height
         variable step:  length_t := (others => '0');  -- step number used in one operation
 
@@ -51,14 +51,14 @@ begin
                 h     := height;
 
                 -- calculate the number to shift
-                for i in 15 downto 0 loop
+                for i in 17 downto 0 loop
                     if (h(i) = '1') then
-                        shift := std_logic_vector(to_unsigned(i, 4));
+                        shift := std_logic_vector(to_unsigned(i, 5));
                     end if;
                 end loop;
 
                 -- barrel shifter
-                for i in 0 to 3 loop
+                for i in 0 to 4 loop
                     if (shift(i) = '1') then
                         h    := std_logic_vector(to_unsigned(0, 2**i)) & h(17 downto 2**i);
                         step := step + 2**i;
