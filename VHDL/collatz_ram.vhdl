@@ -1,7 +1,6 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.std_logic_unsigned.all;
-use IEEE.std_logic_arith.all;
 use IEEE.numeric_std.all;
 use work.types.all;
 
@@ -88,13 +87,24 @@ begin
                     end if;
                 end loop;
 
+                step := step + shift;
+
                 -- barrel shifter
-                for i in 0 to 4 loop
-                    if (shift(i) = '1') then
-                        h    := std_logic_vector(to_unsigned(0, 2**i)) & h(17 downto 2**i);
-                        step := step + 2**i;
-                    end if;
-                end loop;
+                if (shift(0) = '1') then
+                    h    := "0" & h(17 downto 1);
+                end if;
+                if (shift(1) = '1') then
+                    h    := "00" & h(17 downto 2);
+                end if;
+                if (shift(2) = '1') then
+                    h    := "0000" & h(17 downto 4);
+                end if;
+                if (shift(3) = '1') then
+                    h    := "00000000" & h(17 downto 8);
+                end if;
+                if (shift(4) = '1') then
+                    h    := "0000000000000000" & h(17 downto 16);
+                end if;
 
                 -- case odd
                 if (shift = 0) then
