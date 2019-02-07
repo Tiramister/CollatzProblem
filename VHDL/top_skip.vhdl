@@ -74,11 +74,9 @@ begin
                 -- give input to collatz
                 reset <= '0';
 
-                -- skip 5, 9, 11 (mod 12)
-                if (to_integer(unsigned(gate)) mod 12 = 3) then
+                -- skip 5 (mod 6)
+                if (to_integer(unsigned(gate)) mod 6 = 5) then
                     gate <= gate + 4;
-                elsif (to_integer(unsigned(gate)) mod 12 = 7) then
-                    gate <= gate + 6;
                 else
                     gate <= gate + 2;
                 end if;
